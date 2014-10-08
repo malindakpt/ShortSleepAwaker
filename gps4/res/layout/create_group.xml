@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  
+     >
+
+    <EditText
+        android:id="@+id/tGroupName6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="-1dp"
+        android:layout_y="22dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#"
+        android:text="Group Name" >
+
+        <requestFocus />
+    </EditText>
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="8dp"
+        android:layout_y="282dp" >
+
+        <RadioButton
+            android:id="@+id/radConverge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Converging Distance"
+            android:color="#000000" />
+
+        <RadioButton
+            android:id="@+id/radDiverge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diverging Distance" />
+
+        <RadioButton
+            android:id="@+id/radNone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="None" />
+    </RadioGroup>
+
+    <ImageButton
+        android:id="@+id/bCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="117dp"
+        android:layout_y="398dp"
+        android:background="@drawable/ok" />
+
+    <EditText
+        android:id="@+id/tPassword8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="189dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#"
+        android:text="Re-type Password" />
+
+    <EditText
+        android:id="@+id/tPassword7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="140dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#"
+        android:text="Password" />
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="80dp"
+        android:text="Enable password" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="282dp"
+        android:layout_y="350dp"
+        android:text="km"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/tDistance"
+        android:layout_width="73dp"
+        android:layout_height="wrap_content"
+        android:layout_x="193dp"
+        android:layout_y="342dp"
+        android:inputType="numberDecimal" />
+
+</AbsoluteLayout>

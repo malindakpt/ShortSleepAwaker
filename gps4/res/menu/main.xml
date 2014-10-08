@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+   
+    
+    <item android:id="@+id/it1Refresh" android:icon="@drawable/refresh" android:title="Refresh"></item>
+    
+    <item android:id="@+id/it1ShowDetails" android:icon="@drawable/details" android:title="My Details"></item>
+    
+     <item android:id="@+id/it1GroupOpt" android:icon="@drawable/options2" android:title="Options">
+        
+        <menu >
+      
+            <item android:id="@+id/it2CreateGrp" android:title="Create Group" />
+            <item android:id="@+id/it2JoinGrp" android:title="Join a Group" />
+            <item android:id="@+id/it2AddMembers" android:title="Add Members" />
+            <item android:id="@+id/it2RemoveMembers" android:title="Remove Members" />
+        </menu>
+        
+    </item>
+    
+      <item android:id="@+id/it1Settings" android:icon="@drawable/settings" android:title="Settings">  
+        <menu >
+            <item android:id="@+id/it2ChngDist" android:title="Change Distance" />
+            <item android:id="@+id/it2DeleteGroup" android:title="Delete Group" />
+            <item android:id="@+id/it1ChngPhone" android:title="Change My Phone No."/>  
+            <item android:id="@+id/it1Pref" android:title="Preferences"/>  
+                 
+        </menu>  
+    </item>
+
+</menu>
