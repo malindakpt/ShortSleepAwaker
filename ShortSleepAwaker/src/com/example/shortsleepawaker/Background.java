@@ -24,29 +24,23 @@ import android.widget.Toast;
 
 public class Background extends Service implements SensorEventListener {
 
-	 AlarmManager alarmManager ;
-	 PendingIntent pendingIntent;
-	 public static Sleeper thread;
-	 public static boolean runnung=false;
+	 private AlarmManager alarmManager ;
+	 private PendingIntent pendingIntent; 
 	 private SensorManager sensorManager;
 	 public static Vibrator vibrator;
-	 final String STATUS="status";
-	 final String SENSITIVITY="SENSITIVITY";
-		final String TIME_PERIOD="TIME_PERIOD";
-		
+	 
 	@Override
 	public IBinder onBind(Intent intent) { 
 		return null;
-	}
+	} 
 	
-
 	@Override
 	public void onCreate() { 
 		MainActivity.bk=this;
 		
 		vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE); 
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-		  sensorManager.registerListener(this,
+		sensorManager.registerListener(this,
 			        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 			        SensorManager.SENSOR_DELAY_NORMAL);
 	}
@@ -61,20 +55,20 @@ public class Background extends Service implements SensorEventListener {
 		    float x = values[0];
 		    float y = values[1];
 		    float z = values[2];
-		    Double th=3.0-0.5*getInt(SENSITIVITY);
+		    Double th=3.0-0.5*getInt(Constants.SENSITIVITY);
 		    
 		    if(Math.abs(x1-x) >th || Math.abs(y1-y) > th || Math.abs(z1-z) > th){ 
 		    	Calendar c = Calendar.getInstance(); 
 				int seconds = c.get(Calendar.SECOND)+c.get(Calendar.MINUTE)*60 +c.get(Calendar.HOUR)*3600;
 			
- 				putFloat("last", (float) seconds);   
+ 				putFloat(Constants.LAST_MOVEMENT, (float) seconds);   
  		    	
  		    	putFloat("x", x);
  		    	putFloat("y", y);
  		    	putFloat("z", z);
- 		    	//Toast.makeText(getApplicationContext(), "dasd", Toast.LENGTH_LONG).show();
- 		    	MainActivity.txtLastMove.setText("Last Movement  "+MainActivity.getTime());
-		    }
+
+ 		    	MainActivity.setLastMoveTime();
+ 		   }
 		  }
  
 	@Override
@@ -89,18 +83,18 @@ public class Background extends Service implements SensorEventListener {
 					int seconds = c.get(Calendar.SECOND)+c.get(Calendar.MINUTE)*60 +c.get(Calendar.HOUR)*3600;
 	
 					now=System.currentTimeMillis();
-					last=getFloat("last");
+					last=getFloat(Constants.LAST_MOVEMENT);
 				 
 					if(Math.abs(seconds-last)>5 ){
-						if(getBoolean(STATUS)){
+						if(getBoolean(Constants.STATUS)){
 							vibrator.vibrate(100); 
 						}
 				  	}  
 				}	
 				catch(Exception e){ 
-					putFloat("last",(float) now);
+					putFloat(Constants.LAST_MOVEMENT,(float) now);
 				}
-				alarm(getInt(TIME_PERIOD));
+				alarm(getInt(Constants.TIME_PERIOD));
 	}
 	
 	 public void alarm(int d) {
@@ -134,7 +128,7 @@ public class Background extends Service implements SensorEventListener {
 	 }
 	 public void UpdateNotification(){
 		 try{
-		if(getBoolean(STATUS))	
+		if(getBoolean(Constants.STATUS))	
 			startForeground( 33, MainActivity.myNotification);
 		else	
 			stopForeground(true);
@@ -150,7 +144,7 @@ public class Background extends Service implements SensorEventListener {
 	 	SharedPreferences.Editor editor = settings.edit();
 		settings = getSharedPreferences(PREFS_NAME, 0);
 		
-		return settings.getBoolean(key,false);
+		return settings.getBoolean(key,true);
 	}
 	
 	public void putBoolean(String key,Boolean val){
