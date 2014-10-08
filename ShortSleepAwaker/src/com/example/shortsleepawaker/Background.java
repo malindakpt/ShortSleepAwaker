@@ -61,7 +61,7 @@ public class Background extends Service implements SensorEventListener {
 		    float x = values[0];
 		    float y = values[1];
 		    float z = values[2];
-		    Double th=3.0-0.5*getInt(TIME_PERIOD);
+		    Double th=3.0-0.5*getInt(SENSITIVITY);
 		    
 		    if(Math.abs(x1-x) >th || Math.abs(y1-y) > th || Math.abs(z1-z) > th){ 
 		    	Calendar c = Calendar.getInstance(); 

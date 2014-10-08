@@ -102,12 +102,8 @@ public class MainActivity extends Activity  {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				//Toast.makeText(getApplicationContext(), "stop "+skTime.getProgress(), Toast.LENGTH_SHORT).show();
 				int x=skSens.getProgress()+1;
 				txtSens.setText("Sensivity : "+x);
-				putInt(TIME_PERIOD, x  );
-				
 				putInt(SENSITIVITY, skSens.getProgress()+1);
 			}
 			
