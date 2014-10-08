@@ -9,10 +9,12 @@ import android.os.Vibrator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -22,6 +24,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -83,6 +86,28 @@ public class MainActivity extends Activity  {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.action_about:
+	        	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+	        	alertDialog.setTitle("How to use ");
+	        	alertDialog.setMessage("NO MOVEMENTS >> SLEEPING\nApplication is listening for movements of the device and, if no movents are detected then vibration alert is given to the user");
+	        	alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        	// here you can add functions
+	        	}
+	        	});
+	        	alertDialog.setIcon(R.drawable.s4);
+	        	alertDialog.show();
+	            return true;
+	         
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
 	public static void setLastMoveTime(){
 		txtLastMove. setText("Last Movement  "+getTime());
 	}
