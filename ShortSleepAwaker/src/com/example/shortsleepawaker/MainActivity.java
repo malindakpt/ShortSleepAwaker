@@ -121,13 +121,13 @@ public class MainActivity extends Activity  {
 			 myNotification.when = System.currentTimeMillis(); 
 			 Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
 			 PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0,  notificationIntent, 0);
-			 myNotification.setLatestEventInfo(getApplicationContext(),"Wake Up Me. . .","WUM", contentIntent); 
+			 myNotification.setLatestEventInfo(getApplicationContext(),"Snooze Wakeup","Wakeup Me . . .", contentIntent); 
 			 myNotification.flags |= Notification.FLAG_AUTO_CANCEL; 
 			 myNotification.flags |=(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-			 myNotification.tickerText = "Wake Up Me. . ."; 
+			 myNotification.tickerText = "Snooze Wakeup"; 
 	 	 
 			 if(bk!=null)
-				 bk.addNotification();
+				 bk.UpdateNotification();
 	  }
 	
 	private void initUI(){

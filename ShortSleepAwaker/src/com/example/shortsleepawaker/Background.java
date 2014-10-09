@@ -106,26 +106,7 @@ public class Background extends Service implements SensorEventListener {
 	        calendar.add(Calendar.SECOND,d);
 	        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 	    }
-	
-	@SuppressWarnings("deprecation")
-	 public void addNotification(){
-			startForeground( 33, MainActivity.myNotification);
-
-   }
-	public int getInt(String key){
-		String PREFS_NAME = "MyPrefsFile";
-	    SharedPreferences   settings = getSharedPreferences(PREFS_NAME, 0);
-	 	SharedPreferences.Editor editor = settings.edit();
-		settings = getSharedPreferences(PREFS_NAME, 0);
-		
-		return settings.getInt(key, 5);
-	}
-	 public void putInt(String key,int val){
-	 		SharedPreferences   settings = getSharedPreferences("MyPrefsFile", 0);
-	 		SharedPreferences.Editor editor = settings.edit();
-	 		editor.putInt(key,val);
-	  		editor.commit();
-	 }
+  
 	 public void UpdateNotification(){
 		 try{
 		if(getBoolean(Constants.STATUS))	
@@ -134,10 +115,23 @@ public class Background extends Service implements SensorEventListener {
 			stopForeground(true);
 		 }catch(Exception e){		
 			 Toast.makeText(getApplicationContext(), "error " + System.currentTimeMillis()/1000, Toast.LENGTH_SHORT).show();
-}
+		 }
  
-  }
-
+	 }
+	 public int getInt(String key){
+			String PREFS_NAME = "MyPrefsFile";
+		    SharedPreferences   settings = getSharedPreferences(PREFS_NAME, 0);
+		 	SharedPreferences.Editor editor = settings.edit();
+			settings = getSharedPreferences(PREFS_NAME, 0);
+			
+			return settings.getInt(key, 5);
+		}
+		 public void putInt(String key,int val){
+		 		SharedPreferences   settings = getSharedPreferences("MyPrefsFile", 0);
+		 		SharedPreferences.Editor editor = settings.edit();
+		 		editor.putInt(key,val);
+		  		editor.commit();
+		 }
 	public Boolean getBoolean(String key){
 		String PREFS_NAME = "MyPrefsFile";
 	    SharedPreferences   settings = getSharedPreferences(PREFS_NAME, 0);
