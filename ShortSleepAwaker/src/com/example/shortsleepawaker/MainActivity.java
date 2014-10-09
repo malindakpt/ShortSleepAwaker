@@ -111,7 +111,7 @@ public class MainActivity extends Activity  {
 	public static void setLastMoveTime(){
 		txtLastMove. setText("Last Movement  "+getTime());
 	}
-	public void initNotification(){
+	public void initNotification(){ 
 			 myNotification = new Notification(); 
 			 if(getBoolean(Constants.STATUS)){
 				 myNotification.icon = R.drawable.s2;
@@ -144,7 +144,7 @@ public class MainActivity extends Activity  {
 		txtSens.setText("Sensitivity : "+getInt(Constants.SENSITIVITY));
 		txtTime.setText("Check Me Every "+getInt(Constants.TIME_PERIOD)+" Seconds");
 		
-		skSens.setProgress(getInt(Constants.SENSITIVITY));
+		skSens.setProgress(getInt(Constants.SENSITIVITY)-1);
 		skTime.setProgress(getInt(Constants.TIME_PERIOD)-5);
 		
 		txtLastMove.setText("Last Movement  "+getTime());
