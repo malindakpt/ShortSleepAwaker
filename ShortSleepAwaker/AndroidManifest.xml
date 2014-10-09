@@ -6,15 +6,15 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="7"
         android:targetSdkVersion="17" />
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/s1"
+        android:icon="@drawable/icon2"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Black" >
+        android:theme="@android:style/Theme.NoTitleBar" >
         <activity
             android:name="com.example.shortsleepawaker.MainActivity"
             android:launchMode="singleTask"

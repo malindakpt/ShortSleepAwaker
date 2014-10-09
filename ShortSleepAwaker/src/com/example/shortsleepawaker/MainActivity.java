@@ -40,10 +40,11 @@ public class MainActivity extends Activity  {
 
 	
 	private SeekBar skTime,skSens;
-	private static TextView txtTime,txtSens,txtLastMove;
+	public static TextView txtTime,txtSens, txtCount;
 	private ImageButton imgButtonStatus;	 
 	public static Notification myNotification; 
 	public static Background bk;
+	private Intent inService;
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +55,25 @@ public class MainActivity extends Activity  {
 		initUI();
 		addActioins();
 	 
-		Intent inService=new Intent(this, Background.class);
+		inService=new Intent(this, Background.class);
+	
+	    
+	    
+	    if(getBoolean(Constants.FIRST_RUN)){
+	    	putBoolean(Constants.FIRST_RUN, false);
+	    	
+	    	putInt(Constants.TIME_PERIOD, 15);
+	    	skTime.setProgress(15);
+	    	
+	    	putInt(Constants.SENSITIVITY, 3);
+	    	skSens.setProgress(3-1);
+	    	
+	    	Toast.makeText(getApplicationContext(), "Move the phone to reset the timer", Toast.LENGTH_LONG).show();
+	    }
+
 	    startService(inService); 
 	    initNotification(); 
-
+	    
 		imgButtonStatus.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) { 
@@ -67,11 +83,12 @@ public class MainActivity extends Activity  {
 			 		if(getBoolean(Constants.STATUS)){ 
 			 			imgButtonStatus.setImageResource(R.drawable.s0); 
 			 			putBoolean(Constants.STATUS, false); 
-					 
+			 			stopService(inService);
 			 			initNotification();
 			 		}else{
 			 			imgButtonStatus.setImageResource(R.drawable.s2);
 			 			putBoolean(Constants.STATUS, true); 
+			 			startService(inService);
 			 		 	initNotification();
 			 		} 
 			 	} 
@@ -99,6 +116,7 @@ public class MainActivity extends Activity  {
 	        	// here you can add functions
 	        	}
 	        	});
+	        	
 	        	alertDialog.setIcon(R.drawable.s4);
 	        	alertDialog.show();
 	            return true;
@@ -108,9 +126,9 @@ public class MainActivity extends Activity  {
 	    }
 	}
 	
-	public static void setLastMoveTime(){
-		txtLastMove. setText("Last Movement  "+getTime());
-	}
+//	public static void setLastMoveTime(){
+//		txtLastMove. setText("Last Movement  "+getTime());
+//	}
 	public void initNotification(){ 
 			 myNotification = new Notification(); 
 			 if(getBoolean(Constants.STATUS)){
@@ -125,6 +143,7 @@ public class MainActivity extends Activity  {
 			 myNotification.flags |= Notification.FLAG_AUTO_CANCEL; 
 			 myNotification.flags |=(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 			 myNotification.tickerText = "Snooze Wakeup"; 
+			// myNotification.number=getInt(Constants.COUNT);
 	 	 
 			 if(bk!=null)
 				 bk.UpdateNotification();
@@ -136,18 +155,19 @@ public class MainActivity extends Activity  {
 		txtTime=(TextView) findViewById(R.id.txtTimes);
 		txtSens=(TextView) findViewById(R.id.txtSens);
 		imgButtonStatus=(ImageButton) findViewById(R.id.but1); 
-		txtLastMove=(TextView) findViewById(R.id.txtLastMove);
+	//	txtLastMove=(TextView) findViewById(R.id.txtLastMove);
+		txtCount=(TextView) findViewById(R.id.txtCount);
 		
-		skTime.setMax(55);		
+		skTime.setMax(30);		
 		skSens.setMax(4);
 		
-		txtSens.setText("Sensitivity : "+getInt(Constants.SENSITIVITY));
-		txtTime.setText("Check Me Every "+getInt(Constants.TIME_PERIOD)+" Seconds");
+		txtSens.setText(Constants.LBL_SENSE+getInt(Constants.SENSITIVITY));
+		txtTime.setText(Constants.LBL_TIME);
 		
 		skSens.setProgress(getInt(Constants.SENSITIVITY)-1);
 		skTime.setProgress(getInt(Constants.TIME_PERIOD)-5);
 		
-		txtLastMove.setText("Last Movement  "+getTime());
+		//txtLastMove.setText("Last Movement  "+getTime());
 		
 		if(getBoolean(Constants.STATUS)){
 			imgButtonStatus.setImageResource(R.drawable.s2);  
@@ -156,13 +176,16 @@ public class MainActivity extends Activity  {
  		} 
 	}
 	
+	
+	
+	
 	private void addActioins(){
 		skSens.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				int x=skSens.getProgress()+1;
-				txtSens.setText("Sensivity : "+x);
+				txtSens.setText(Constants.LBL_SENSE+x);
 				putInt(Constants.SENSITIVITY, skSens.getProgress()+1);
 			}
 			
@@ -185,8 +208,14 @@ public class MainActivity extends Activity  {
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 				int x=skTime.getProgress()+5;
-				txtTime.setText("Check Me Every "+x+" Seconds");
+				txtTime.setText(Constants.LBL_TIME);
+				
 				putInt(Constants.TIME_PERIOD, x  );
+				putInt(Constants.COUNT,x);
+				decrement();
+				
+				stopService(inService);
+				startService(inService); 
 			}
 			
 			@Override
@@ -201,7 +230,15 @@ public class MainActivity extends Activity  {
 	
 	}
 	 
-	 
+	 public void decrement(){
+			int x=getInt(Constants.COUNT);
+			
+			if(x>0)
+				x--;
+			
+			putInt(Constants.COUNT, x);
+			MainActivity.txtCount.setText(x+"");
+		}
 	
 	public int getInt(String key){
 		String PREFS_NAME = "MyPrefsFile";

@@ -11,19 +11,21 @@
 
     <ImageButton
         android:id="@+id/but1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
+        android:layout_marginBottom="90dp"
+        android:layout_marginTop="18dp"
         android:background="@null"
+        android:scaleType="fitCenter"
         android:src="@drawable/s1" />
 
     <SeekBar
         android:id="@+id/skSens"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/txtCount"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp" />
 
@@ -53,12 +55,21 @@
         android:layout_alignLeft="@+id/txtSens" />
 
     <TextView
-        android:id="@+id/txtLastMove"
+        android:id="@+id/txtCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Last Movement :"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="TextView"
+        android:textSize="80dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtCount"
+        android:layout_alignTop="@+id/txtCount"
+        android:text="TIME  LEFT"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>
